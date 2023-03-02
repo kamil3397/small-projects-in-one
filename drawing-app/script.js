@@ -9,7 +9,8 @@ const ctx = canvas.getContext("2d");
 
 let size = 10;
 let isPressed = false;
-let color = "black";
+colorEl.value = "black";
+let color = colorEl.value;
 let x;
 let y;
 
@@ -20,12 +21,13 @@ canvas.addEventListener("mousedown", (e) => {
   y = e.offsetY;
 });
 
-canvas.addEventListener("mouseup", (e) => {
+document.addEventListener("mouseup", (e) => {
   isPressed = false;
 
   x = undefined;
   y = undefined;
 });
+
 canvas.addEventListener("mousemove", (e) => {
   if (isPressed) {
     const x2 = e.offsetX;
@@ -58,25 +60,28 @@ function drawLine(x1, y1, x2, y2) {
 function updateSizeOnScreen() {
   sizeEL.innerText = size;
 }
+
 increaseBtn.addEventListener("click", () => {
   size += 5;
 
   if (size > 50) {
     size = 50;
   }
+
   updateSizeOnScreen();
 });
+
 decreaseBtn.addEventListener("click", () => {
   size -= 5;
 
   if (size < 5) {
     size = 5;
   }
+
   updateSizeOnScreen();
 });
 
 colorEl.addEventListener("change", (e) => (color = e.target.value));
-sizeEL.addEventListener();
 
 clearEl.addEventListener("click", () =>
   ctx.clearRect(0, 0, canvas.width, canvas.height)
